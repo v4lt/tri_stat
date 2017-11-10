@@ -1,0 +1,17 @@
+.deps/
+AUTHORS
+COPYING
+ChangeLog
+INSTALL
+Makefile
+Makefile.am
+Makefile.in
+NEWS
+compile
+config.log
+config.status
+configure.ac
+depcomp
+install-sh
+missing
+
