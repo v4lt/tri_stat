@@ -58,7 +58,6 @@ int main(int argc, char *argv[]) {
 
     srandom(graine);
 
-    printf("%d\n", taille);
     for (i=0; i<taille; i++)
         printf("%ld\n", (random()%(max-min) + min));
     return 0;
