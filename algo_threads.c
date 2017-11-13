@@ -82,7 +82,7 @@ void algo_principal(int parallelism, int *tableau, int taille, char *arg, int st
     if(stat)
     {
       printf("%d%s", parallelism, " " ); //Nombre thread
-      printf("%d%s", taille, " " ); //Taille vecteur
+      //printf("%d%s", taille, " " ); //Taille vecteur
       printf("%lf%s", diff_debut_prog_creation_threads, " " );
       printf("%lf%s", diff_creation_threads, " ");
       printf("%lf%s", diff_wait_end_of_threads, " ");
