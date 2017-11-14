@@ -13,18 +13,15 @@ data_thread1M <- data.frame(read.table(file="resultat/result1M.txt",sep=' ', dec
 
 stat_1K<-ddply(data_thread1K,c("Nb_Thread"),summarise,total=Total)
 stat_10K<-ddply(data_thread10K,c("Nb_Thread"),summarise,total=Total)
-stat_100K<-ddply(data_thread100K,c("Nb_Thread"),summarise,total=Total)
-stat_1M<-ddply(data_thread1M,c("Nb_Thread"),summarise,total=Total)
 
 
 # tracé des résultats obtenus
 
-p <- ggplot()+scale_x_continuous(breaks=seq(0, 14, 1))+ expand_limits(y=min(stat_1K[,2]))
+p <- ggplot()+scale_x_continuous(breaks=seq(0, 14, 1))
+p <- p + geom_line(data=stat_1K, aes(x=Nb_Thread, y=total, colour = "1K Values"))+geom_point(data=stat_1K, aes(x=which.min(total),y=min(total),colour="fastest"))
+p <- p + geom_line(data=stat_10K, aes(x=Nb_Thread, y=total, colour = "10K Values"))+geom_point(data=stat_10K, aes(x=which.min(total),y=min(total),colour="fastest"))
 
-p <- p + geom_line(data=stat_1K, aes(x=Nb_Thread, y=total, colour = "1K Values"))
-p <- p + geom_line(data=stat_10K, aes(x=Nb_Thread, y=total, colour = "10K Values"))
-
-cbPalette <- c("1K Values"="#56B4E9","10K Values"="#009E73","100K Values"="#E69F00","1M Values"="#D55E00","point"="black")
+cbPalette <- c("1K Values"="#56B4E9","10K Values"="#009E73","100K Values"="#E69F00","1M Values"="#D55E00","fastest"="black")
 themes <-  theme(panel.background = element_rect(fill = "lightgrey"),
                 panel.grid.minor = element_line(colour = "black", linetype="dashed", size = 0.1),
                 panel.grid.major = element_line(colour = "black", size = 0.1),
@@ -47,8 +44,10 @@ dev.off()
 
 
 
+stat_100K<-ddply(data_thread100K,c("Nb_Thread"),summarise,total=Total)
+
 p <- ggplot()+scale_x_continuous(breaks=seq(0, 12, 1))
-p <- p + geom_line(data=stat_100K, aes(x=Nb_Thread, y=total, colour = "100K Values"))
+p <- p + geom_line(data=stat_100K, aes(x=Nb_Thread, y=total, colour = "100K Values"))+geom_point(data=stat_100K, aes(x=which.min(total),y=min(total),colour="fastest"))
 
 p <-  p + axis_x
 p <- p + ylab("Temps de calcul (ms)")
@@ -62,8 +61,10 @@ dev.off()
 
 
 
+
+stat_1M<-ddply(data_thread1M,c("Nb_Thread"),summarise,total=Total)
 p <- ggplot()+scale_x_continuous(breaks=seq(0, 12, 1))
-p <- p + geom_line(data=stat_1M, aes(x=Nb_Thread, y=total, colour = "1M Values"))
+p <- p + geom_line(data=stat_1M, aes(x=Nb_Thread, y=total, colour = "1M Values"))+geom_point(data=stat_1M, aes(x=which.min(total),y=min(total),colour="fastest"))
 
 p <-  p + axis_x
 p <- p + ylab("Temps de calcul (ms)")
@@ -85,10 +86,10 @@ stat_1M<-ddply(data_thread1M,c("Nb_Thread"),summarise,Before_Crea=Before_Crea)
 
 
 p <- ggplot()+scale_x_continuous(breaks=seq(0, 12, 1))
-p <- p + geom_line(data=stat_1K, aes(x=Nb_Thread, y=Before_Crea, colour = "1K Values"))
-p <- p + geom_line(data=stat_10K, aes(x=Nb_Thread, y=Before_Crea, colour = "10K Values"))
-p <- p + geom_line(data=stat_100K, aes(x=Nb_Thread, y=Before_Crea, colour = "100K Values"))
-p <- p + geom_line(data=stat_1M, aes(x=Nb_Thread, y=Before_Crea, colour = "1M Values"))
+p <- p + geom_line(data=stat_1K, aes(x=Nb_Thread, y=Before_Crea, colour = "1K Values"))+geom_point(data=stat_1K, aes(x=which.min(Before_Crea),y=min(Before_Crea),colour="fastest"))
+p <- p + geom_line(data=stat_10K, aes(x=Nb_Thread, y=Before_Crea, colour = "10K Values"))+geom_point(data=stat_10K, aes(x=which.min(Before_Crea),y=min(Before_Crea),colour="fastest"))
+p <- p + geom_line(data=stat_100K, aes(x=Nb_Thread, y=Before_Crea, colour = "100K Values"))+geom_point(data=stat_100K, aes(x=which.min(Before_Crea),y=min(Before_Crea),colour="fastest"))
+p <- p + geom_line(data=stat_1M, aes(x=Nb_Thread, y=Before_Crea, colour = "1M Values"))+geom_point(data=stat_1M, aes(x=which.min(Before_Crea),y=min(Before_Crea),colour="fastest"))
 
 p <-  p + axis_x
 p <- p + ylab("Temps(ms)")
@@ -102,16 +103,10 @@ dev.off()
 
 
 
-stat_1K<-ddply(data_thread1K,c("Nb_Thread"),summarise,Crea_Thread=Crea_Thread)
-stat_10K<-ddply(data_thread10K,c("Nb_Thread"),summarise,Crea_Thread=Crea_Thread)
-stat_100K<-ddply(data_thread100K,c("Nb_Thread"),summarise,Crea_Thread=Crea_Thread)
 stat_1M<-ddply(data_thread1M,c("Nb_Thread"),summarise,Crea_Thread=Crea_Thread)
 
 p <- ggplot()+scale_x_continuous(breaks=seq(0, 12, 1))
-p <- p + geom_line(data=stat_1K, aes(x=Nb_Thread, y=Crea_Thread, colour = "1K Values"))
-p <- p + geom_line(data=stat_10K, aes(x=Nb_Thread, y=Crea_Thread, colour = "10K Values"))
-p <- p + geom_line(data=stat_100K, aes(x=Nb_Thread, y=Crea_Thread, colour = "100K Values"))
-p <- p + geom_line(data=stat_1M, aes(x=Nb_Thread, y=Crea_Thread, colour = "1M Values"))
+p <- p + geom_line(data=stat_1M, aes(x=Nb_Thread, y=Crea_Thread, colour = "1M Values"))+geom_point(data=stat_1M, aes(x=which.min(Crea_Thread),y=min(Crea_Thread),colour="fastest"))
 
 p <-  p + axis_x
 p <- p + ylab("Temps(ms)")
@@ -119,7 +114,28 @@ p <-  p + themes
 p <- p + scale_colour
 
 
-pdf("pdf/Crea_Thread_Time.pdf")
+pdf("pdf/Crea_Thread_Time_1M.pdf")
+print(p+ ggtitle("Comparaison des différents temps de la création des threads"))
+dev.off()
+
+
+
+stat_1K<-ddply(data_thread1K,c("Nb_Thread"),summarise,Crea_Thread=Crea_Thread)
+stat_10K<-ddply(data_thread10K,c("Nb_Thread"),summarise,Crea_Thread=Crea_Thread)
+stat_100K<-ddply(data_thread100K,c("Nb_Thread"),summarise,Crea_Thread=Crea_Thread)
+
+p <- ggplot()+scale_x_continuous(breaks=seq(0, 12, 1))
+p <- p + geom_line(data=stat_1K, aes(x=Nb_Thread, y=Crea_Thread, colour = "1K Values"))+geom_point(data=stat_1K, aes(x=which.min(Crea_Thread),y=min(Crea_Thread),colour="fastest"))
+p <- p + geom_line(data=stat_10K, aes(x=Nb_Thread, y=Crea_Thread, colour = "10K Values"))+geom_point(data=stat_10K, aes(x=which.min(Crea_Thread),y=min(Crea_Thread),colour="fastest"))
+p <- p + geom_line(data=stat_100K, aes(x=Nb_Thread, y=Crea_Thread, colour = "100K Values"))+geom_point(data=stat_100K, aes(x=which.min(Crea_Thread),y=min(Crea_Thread),colour="fastest"))
+
+p <-  p + axis_x
+p <- p + ylab("Temps(ms)")
+p <-  p + themes
+p <- p + scale_colour
+
+
+pdf("pdf/Crea_Thread_Time_1K_10K_100K.pdf")
 print(p+ ggtitle("Comparaison des différents temps de la création des threads"))
 dev.off()
 
@@ -127,14 +143,10 @@ dev.off()
 
 stat_1K<-ddply(data_thread1K,c("Nb_Thread"),summarise,Wait=Wait)
 stat_10K<-ddply(data_thread10K,c("Nb_Thread"),summarise,Wait=Wait)
-stat_100K<-ddply(data_thread100K,c("Nb_Thread"),summarise,Wait=Wait)
-stat_1M<-ddply(data_thread1M,c("Nb_Thread"),summarise,Wait=Wait)
 
 p <- ggplot()+scale_x_continuous(breaks=seq(0, 12, 1))
-p <- p + geom_line(data=stat_1K, aes(x=Nb_Thread, y=Wait, colour = "1K Values"))
-p <- p + geom_line(data=stat_10K, aes(x=Nb_Thread, y=Wait, colour = "10K Values"))
-p <- p + geom_line(data=stat_100K, aes(x=Nb_Thread, y=Wait, colour = "100K Values"))
-p <- p + geom_line(data=stat_1M, aes(x=Nb_Thread, y=Wait, colour = "1M Values"))
+p <- p + geom_line(data=stat_1K, aes(x=Nb_Thread, y=Wait, colour = "1K Values"))+geom_point(data=stat_1K, aes(x=which.min(Wait),y=min(Wait),colour="fastest"))
+p <- p + geom_line(data=stat_10K, aes(x=Nb_Thread, y=Wait, colour = "10K Values"))+geom_point(data=stat_10K, aes(x=which.min(Wait),y=min(Wait),colour="fastest"))
 
 p <-  p + axis_x
 p <- p + ylab("Temps(ms)")
@@ -142,10 +154,38 @@ p <-  p + themes
 p <- p + scale_colour
 
 
-pdf("pdf/Wait_Thread_Time.pdf")
+pdf("pdf/Wait_Thread_Time_1K_10K.pdf")
 print(p+ ggtitle("Comparaison des différents temps de la création des threads"))
 dev.off()
 
+
+stat_100K<-ddply(data_thread100K,c("Nb_Thread"),summarise,Wait=Wait)
+
+p <- ggplot()+scale_x_continuous(breaks=seq(0, 12, 1))
+p <- p + geom_line(data=stat_100K, aes(x=Nb_Thread, y=Wait, colour = "100K Values"))+geom_point(data=stat_100K, aes(x=which.min(Wait),y=min(Wait),colour="fastest"))
+
+p <-  p + axis_x
+p <- p + ylab("Temps(ms)")
+p <-  p + themes
+p <- p + scale_colour
+
+
+pdf("pdf/Wait_Thread_Time_100K.pdf")
+print(p+ ggtitle("Comparaison des différents temps de la création des threads"))
+dev.off()
+
+
+
+stat_1M<-ddply(data_thread1M,c("Nb_Thread"),summarise,Wait=Wait)
+p <- ggplot()+scale_x_continuous(breaks=seq(0, 12, 1))
+p <- p + geom_line(data=stat_1M, aes(x=Nb_Thread, y=Wait, colour = "1M Values"))+geom_point(data=stat_1M, aes(x=which.min(Wait),y=min(Wait),colour="fastest"))
+p <-  p + axis_x
+p <- p + ylab("Temps(ms)")
+p <-  p + themes
+p <- p + scale_colour
+pdf("pdf/Wait_Thread_Time_1M.pdf")
+print(p+ ggtitle("Comparaison des différents temps de la création des threads"))
+dev.off()
 
 
 stat_1K<-ddply(data_thread1K,c("Nb_Thread"),summarise,Tri=Tri)
@@ -154,10 +194,10 @@ stat_100K<-ddply(data_thread100K,c("Nb_Thread"),summarise,Tri=Tri)
 stat_1M<-ddply(data_thread1M,c("Nb_Thread"),summarise,Tri=Tri)
 
 p <- ggplot()+scale_x_continuous(breaks=seq(0, 12, 1))
-p <- p + geom_line(data=stat_1K, aes(x=Nb_Thread, y=Tri, colour = "1K Values"))
-p <- p + geom_line(data=stat_10K, aes(x=Nb_Thread, y=Tri, colour = "10K Values"))
-p <- p + geom_line(data=stat_100K, aes(x=Nb_Thread, y=Tri, colour = "100K Values"))
-p <- p + geom_line(data=stat_1M, aes(x=Nb_Thread, y=Tri, colour = "1M Values"))
+p <- p + geom_line(data=stat_1K, aes(x=Nb_Thread, y=Tri, colour = "1K Values"))+geom_point(data=stat_1K, aes(x=which.min(Tri),y=min(Tri),colour="fastest"))
+p <- p + geom_line(data=stat_10K, aes(x=Nb_Thread, y=Tri, colour = "10K Values"))+geom_point(data=stat_10K, aes(x=which.min(Tri),y=min(Tri),colour="fastest"))
+p <- p + geom_line(data=stat_100K, aes(x=Nb_Thread, y=Tri, colour = "100K Values"))+geom_point(data=stat_100K, aes(x=which.min(Tri),y=min(Tri),colour="fastest"))
+p <- p + geom_line(data=stat_1M, aes(x=Nb_Thread, y=Tri, colour = "1M Values"))+geom_point(data=stat_1M, aes(x=which.min(Tri),y=min(Tri),colour="fastest"))
 
 p <-  p + axis_x
 p <- p + ylab("Temps(ms)")
@@ -165,9 +205,53 @@ p <-  p + themes
 p <- p + scale_colour
 
 
-pdf("pdf/Tri_Trime.pdf")
+pdf("pdf/Tri_Trime_1K_10K.pdf")
 print(p+ ggtitle("Comparaison des différents temps de la création des threads"))
 dev.off()
+
+
+
+
+
+
+stat_100K<-ddply(data_thread100K,c("Nb_Thread"),summarise,Tri=Tri)
+
+p <- ggplot()+scale_x_continuous(breaks=seq(0, 12, 1))
+p <- p + geom_line(data=stat_100K, aes(x=Nb_Thread, y=Tri, colour = "100K Values"))+geom_point(data=stat_100K, aes(x=which.min(Tri),y=min(Tri),colour="fastest"))
+p <-  p + axis_x
+p <- p + ylab("Temps(ms)")
+p <-  p + themes
+p <- p + scale_colour
+
+
+pdf("pdf/Tri_Trime_100K.pdf")
+print(p+ ggtitle("Comparaison des différents temps de la création des threads"))
+dev.off()
+
+
+
+
+
+
+
+
+
+stat_1M<-ddply(data_thread1M,c("Nb_Thread"),summarise,Tri=Tri)
+
+p <- ggplot()+scale_x_continuous(breaks=seq(0, 12, 1))
+p <- p + geom_line(data=stat_1M, aes(x=Nb_Thread, y=Tri, colour = "1M Values"))+geom_point(data=stat_1M, aes(x=which.min(Tri),y=min(Tri),colour="fastest"))
+
+p <-  p + axis_x
+p <- p + ylab("Temps(ms)")
+p <-  p + themes
+p <- p + scale_colour
+
+
+pdf("pdf/Tri_Trime_1M.pdf")
+print(p+ ggtitle("Comparaison des différents temps de la création des threads"))
+dev.off()
+
+
 
 
 
@@ -179,10 +263,10 @@ stat_1M<-ddply(data_thread1M,c("Nb_Thread"),summarise,Destruct=Destruct)
 
 
 p <- ggplot()+scale_x_continuous(breaks=seq(0, 12, 1))
-p <- p + geom_line(data=stat_1K, aes(x=Nb_Thread, y=Destruct, colour = "1K Values"))
-p <- p + geom_line(data=stat_10K, aes(x=Nb_Thread, y=Destruct, colour = "10K Values"))
-p <- p + geom_line(data=stat_100K, aes(x=Nb_Thread, y=Destruct, colour = "100K Values"))
-p <- p + geom_line(data=stat_1M, aes(x=Nb_Thread, y=Destruct, colour = "1M Values"))
+p <- p + geom_line(data=stat_1K, aes(x=Nb_Thread, y=Destruct, colour = "1K Values"))+geom_point(data=stat_1K, aes(x=which.min(Destruct),y=min(Destruct),colour="fastest"))
+p <- p + geom_line(data=stat_10K, aes(x=Nb_Thread, y=Destruct, colour = "10K Values"))+geom_point(data=stat_10K, aes(x=which.min(Destruct),y=min(Destruct),colour="fastest"))
+p <- p + geom_line(data=stat_100K, aes(x=Nb_Thread, y=Destruct, colour = "100K Values"))+geom_point(data=stat_100K, aes(x=which.min(Destruct),y=min(Destruct),colour="fastest"))
+p <- p + geom_line(data=stat_1M, aes(x=Nb_Thread, y=Destruct, colour = "1M Values"))+geom_point(data=stat_1M, aes(x=which.min(Destruct),y=min(Destruct),colour="fastest"))
 
 p <-  p + axis_x
 p <- p + ylab("Temps(ms)")

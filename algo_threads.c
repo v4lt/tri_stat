@@ -72,7 +72,7 @@ void algo_principal(int parallelism, int *tableau, int taille, char *arg, int st
 
     struct timeval fin_programme;
     gettimeofday(&fin_programme, NULL);
-    
+
     double diff_debut_prog_creation_threads = creation_threads.tv_usec - debut_programme.tv_usec;
     double diff_creation_threads = fin_creation_threads.tv_usec - creation_threads.tv_usec;
     double diff_wait_end_of_threads = tri_des_resultats.tv_usec - fin_creation_threads.tv_usec;
