@@ -1,4 +1,4 @@
-# script R permettant de comparer les temps moyens de calcul des produits de matrices carrÃ©es entre algo classique et algo transposÃ©e
+# script R permettant de comparer les temps moyens de calcul des produits de matrices carrées entre algo classique et algo transposée
 # pour des tailles variant de 2000 Ã  5000
 
 library(ggplot2)
@@ -15,7 +15,7 @@ stat_1K<-ddply(data_thread1K,c("Nb_Thread"),summarise,total=Total)
 stat_10K<-ddply(data_thread10K,c("Nb_Thread"),summarise,total=Total)
 
 
-# tracÃ© des rÃ©sultats obtenus
+# tracé des résultats obtenus
 
 p <- ggplot()+scale_x_continuous(breaks=seq(0, 14, 1))
 p <- p + geom_line(data=stat_1K, aes(x=Nb_Thread, y=total, colour = "1K Values"))+geom_point(data=stat_1K, aes(x=which.min(total),y=min(total),colour="fastest"))
@@ -38,8 +38,8 @@ p <- p + ylab("Temps de calcul (ms)")
 p <-  p + themes
 p <- p + scale_colour
 
-pdf("pdf/1K_10K_Total_Exec.pdf")
-print(p+ ggtitle("Temps d'Ã©xÃ©cution par thread pour des vecteurs \n de 1k et 10K valeurs"))
+pdf("pdf/Temps totals d'execution pour vecteurs de mille et 10 mille valeurs.pdf")
+print(p+ ggtitle("Temps d'éxécution par thread pour des vecteurs \n de 1k et 10K valeurs"))
 dev.off()
 
 
@@ -55,8 +55,8 @@ p <-  p + themes
 p <- p + scale_colour
 
 
-pdf("pdf/100K_Total_Exec.pdf")
-print(p+ ggtitle("Temps d'Ã©xÃ©cution par thread pour des vecteurs \n de 100k valeurs"))
+pdf("pdf/Temps total d'execution pour vecteur de 100 mille valeurs.pdf")
+print(p+ ggtitle("Temps d'éxécution par thread pour des vecteurs \n de 100k valeurs"))
 dev.off()
 
 
@@ -71,8 +71,8 @@ p <- p + ylab("Temps de calcul (ms)")
 p <-  p + themes
 p <- p + scale_colour
 
-pdf("pdf/1M_Total_Exec.pdf")
-print(p+ ggtitle("Temps d'Ã©xÃ©cution par thread pour des vecteurs \n de 1M valeurs"))
+pdf("pdf/Temps total d'execution pour vecteur de 1 million valeurs.pdf")
+print(p+ ggtitle("Temps d'éxécution par thread pour des vecteurs \n de 1M valeurs"))
 dev.off()
 
 
@@ -97,8 +97,8 @@ p <-  p + themes
 p <- p + scale_colour
 
 
-pdf("pdf/Before_Crea_Time.pdf")
-print(p+ ggtitle("Comparaison des diffÃ©rents temps avant la crÃ©ation"))
+pdf("pdf/Temps d'initialisation.pdf")
+print(p+ ggtitle("Comparaison des différents temps d'initialisation"))
 dev.off()
 
 
@@ -114,8 +114,8 @@ p <-  p + themes
 p <- p + scale_colour
 
 
-pdf("pdf/Crea_Thread_Time_1M.pdf")
-print(p+ ggtitle("Comparaison des diffÃ©rents temps de la crÃ©ation des threads"))
+pdf("pdf/Temps de creation des threads pour 1 million valeurs.pdf")
+print(p+ ggtitle("Temps de creation des threads pour un vecteur de 1M valeurs"))
 dev.off()
 
 
@@ -135,8 +135,8 @@ p <-  p + themes
 p <- p + scale_colour
 
 
-pdf("pdf/Crea_Thread_Time_1K_10K_100K.pdf")
-print(p+ ggtitle("Comparaison des diffÃ©rents temps de la crÃ©ation des threads"))
+pdf("pdf/Temps de creation des threads pour vecteurs de mille, 10 mille et 100 mille valeurs.pdf")
+print(p+ ggtitle("Comparaison des différents temps de la création des threads"))
 dev.off()
 
 
@@ -154,8 +154,8 @@ p <-  p + themes
 p <- p + scale_colour
 
 
-pdf("pdf/Wait_Thread_Time_1K_10K.pdf")
-print(p+ ggtitle("Comparaison des diffÃ©rents temps de la crÃ©ation des threads"))
+pdf("pdf/Temps d'attente de syncronisation pour des vecteurs de mille et 10 mille valeurs.pdf")
+print(p+ ggtitle("Comparaison des temps d'attente de syncronisation \n des threads pour 1k et 10k valeurs"))
 dev.off()
 
 
@@ -170,8 +170,8 @@ p <-  p + themes
 p <- p + scale_colour
 
 
-pdf("pdf/Wait_Thread_Time_100K.pdf")
-print(p+ ggtitle("Comparaison des diffÃ©rents temps de la crÃ©ation des threads"))
+pdf("pdf/Temps d'attente de syncronisation des vecteurs de 100 mille vecteurs.pdf")
+print(p+ ggtitle("Comparaison des temps d'attente de syncronisation \n des threads pour 100K valeurs"))
 dev.off()
 
 
@@ -183,8 +183,8 @@ p <-  p + axis_x
 p <- p + ylab("Temps(ms)")
 p <-  p + themes
 p <- p + scale_colour
-pdf("pdf/Wait_Thread_Time_1M.pdf")
-print(p+ ggtitle("Comparaison des diffÃ©rents temps de la crÃ©ation des threads"))
+pdf("pdf/Comparaison des temps d'attente de syncronisation des threads \n pour 1M valeurs.pdf")
+print(p+ ggtitle("Comparaison des temps d'attente de syncronisation \n des threads pour 1M valeurs"))
 dev.off()
 
 
@@ -205,8 +205,8 @@ p <-  p + themes
 p <- p + scale_colour
 
 
-pdf("pdf/Tri_Trime_1K_10K.pdf")
-print(p+ ggtitle("Comparaison des diffÃ©rents temps de la crÃ©ation des threads"))
+pdf("pdf/Temps de tri pour des vecteurs de mille et 10 mille valeurs.pdf")
+print(p+ ggtitle("Comparaison des différents temps de tri pour vecteurs \n de 1k et 10k valeurs"))
 dev.off()
 
 
@@ -224,16 +224,9 @@ p <-  p + themes
 p <- p + scale_colour
 
 
-pdf("pdf/Tri_Trime_100K.pdf")
-print(p+ ggtitle("Comparaison des diffÃ©rents temps de la crÃ©ation des threads"))
+pdf("pdf/Temps de tri de vecteurs de 100 mille valeurs.pdf")
+print(p+ ggtitle("Comparaison des différents temps de tri pour vecteurs \n de 100k valeurs"))
 dev.off()
-
-
-
-
-
-
-
 
 
 stat_1M<-ddply(data_thread1M,c("Nb_Thread"),summarise,Tri=Tri)
@@ -247,8 +240,8 @@ p <-  p + themes
 p <- p + scale_colour
 
 
-pdf("pdf/Tri_Trime_1M.pdf")
-print(p+ ggtitle("Comparaison des diffÃ©rents temps de la crÃ©ation des threads"))
+pdf("pdf/Temps de tri pour des vecteurs de 1 million valeurs.pdf")
+print(p+ ggtitle("Comparaison des différents temps de tri pour vecteurs \n de 1M valeurs"))
 dev.off()
 
 
@@ -274,6 +267,6 @@ p <-  p + themes
 p <- p + scale_colour
 
 
-pdf("pdf/Destruct_Time.pdf")
-print(p+ ggtitle("Comparaison des diffÃ©rents temps de la crÃ©ation des threads"))
+pdf("pdf/Temps de destruction des threads pour des vecteurs de differente taille.pdf")
+print(p+ ggtitle("Comparaison des différents temps de destruction des threads"))
 dev.off()
