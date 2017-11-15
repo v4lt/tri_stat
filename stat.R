@@ -136,7 +136,7 @@ p <- p + scale_colour
 
 
 pdf("pdf/Temps de creation des threads pour vecteurs de mille, 10 mille et 100 mille valeurs.pdf")
-print(p+ ggtitle("Comparaison des différents temps de la création des threads"))
+print(p+ ggtitle("Comparaison des différents temps de création des threads"))
 dev.off()
 
 
@@ -154,8 +154,8 @@ p <-  p + themes
 p <- p + scale_colour
 
 
-pdf("pdf/Temps d'attente de syncronisation pour des vecteurs de mille et 10 mille valeurs.pdf")
-print(p+ ggtitle("Comparaison des temps d'attente de syncronisation \n des threads pour 1k et 10k valeurs"))
+pdf("pdf/Temps d'attente de fin d'execution pour des vecteurs de mille et 10 mille valeurs.pdf")
+print(p+ ggtitle("Comparaison des temps d'attente de fin d'éxécution \n des threads pour 1k et 10k valeurs"))
 dev.off()
 
 
@@ -170,8 +170,8 @@ p <-  p + themes
 p <- p + scale_colour
 
 
-pdf("pdf/Temps d'attente de syncronisation des vecteurs de 100 mille vecteurs.pdf")
-print(p+ ggtitle("Comparaison des temps d'attente de syncronisation \n des threads pour 100K valeurs"))
+pdf("pdf/Temps d'attente de fin d'execution pour des vecteurs de 100 mille vecteurs.pdf")
+print(p+ ggtitle("Comparaison des temps d'attente de fin d'éxécution \n des threads pour 100K valeurs"))
 dev.off()
 
 
@@ -183,8 +183,8 @@ p <-  p + axis_x
 p <- p + ylab("Temps(ms)")
 p <-  p + themes
 p <- p + scale_colour
-pdf("pdf/Comparaison des temps d'attente de syncronisation des threads \n pour 1M valeurs.pdf")
-print(p+ ggtitle("Comparaison des temps d'attente de syncronisation \n des threads pour 1M valeurs"))
+pdf("pdf/Comparaison des temps d'attente de fin d'execution des threads \n pour 1M valeurs.pdf")
+print(p+ ggtitle("Comparaison des temps d'attente de fin d'éxécution \n des threads pour 1M valeurs"))
 dev.off()
 
 
@@ -205,14 +205,9 @@ p <-  p + themes
 p <- p + scale_colour
 
 
-pdf("pdf/Temps de tri pour des vecteurs de mille et 10 mille valeurs.pdf")
-print(p+ ggtitle("Comparaison des différents temps de tri pour vecteurs \n de 1k et 10k valeurs"))
+pdf("pdf/Temps de tri pour des vecteurs de taille differente.pdf")
+print(p+ ggtitle("Comparaison des différents temps de tri"))
 dev.off()
-
-
-
-
-
 
 stat_100K<-ddply(data_thread100K,c("Nb_Thread"),summarise,Tri=Tri)
 
